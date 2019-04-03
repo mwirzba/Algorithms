@@ -14,8 +14,6 @@ namespace Huffman_Algorithm
         public Node Right { get; set; } = null;
         public int Freq { get; set; } = 0;
         public string Symbol { get; set; } = "null";
-
-
     }
     class Algorithm
     {
@@ -25,8 +23,7 @@ namespace Huffman_Algorithm
             List<string> charCombination = new List<string>();
             string chars = File.ReadAllText(path);
             if (mode == true)
-            {
-               
+            { 
                 if (chars.Length % 2 != 0)
                     chars += "1";
 
@@ -53,7 +50,7 @@ namespace Huffman_Algorithm
                 if(!l.Any(n=>n.Symbol.Equals(c)))
                     l.Add(new Node(){Freq = charCombination.Count(n=>n.Equals(c)) , Symbol = c});
             }
-
+ 
             var le = l.Max(p => p.Freq);
             length = 8 * le.ToString().Length * 355;
             return l;
@@ -81,7 +78,7 @@ namespace Huffman_Algorithm
 
             printCode(Extract_Min(nodes),"");
             Console.WriteLine();
-            draw_tree_hor(Extract_Min(nodes));
+           // draw_tree_hor(Extract_Min(nodes));
             Console.WriteLine("\n------Porownianie dlugosci-----");
             Console.WriteLine("Kody o stale dlugosci: "+length);
             Console.WriteLine("kod Huffmana: "+huffLength);
@@ -90,7 +87,7 @@ namespace Huffman_Algorithm
         Dictionary<Node,string> dic = new Dictionary<Node,string>();
         private double length;
         private double huffLength;
-        public void printCode(Node root, String s)
+        public void printCode(Node root, string s)
         {
 
             // base case; if the left and right are null 
@@ -108,7 +105,6 @@ namespace Huffman_Algorithm
 
             // if we go to left then add "0" to the code. 
             // if we go to the right add"1" to the code. 
-
             // recursive calls for left and 
             // right sub-tree of the generated tree. 
             printCode(root.Left, s + "0");
@@ -122,7 +118,6 @@ namespace Huffman_Algorithm
                 select n).First();
             //return (Node)nodes.Where(n => n.freq.Equals(nodes.Min(m => m.freq)));
         }
-
 
         private readonly int space = 10;
         void draw_tree_hor2(Node tree, int distance)
@@ -145,13 +140,9 @@ namespace Huffman_Algorithm
 
             draw_tree_hor2(tree.Left, distance);
         }
-
-
         void draw_tree_hor(Node tree)
         {
             draw_tree_hor2(tree, 0);
         }
-
-        
     }
 }
