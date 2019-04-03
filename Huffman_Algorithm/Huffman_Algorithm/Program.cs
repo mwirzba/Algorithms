@@ -11,7 +11,7 @@ namespace Huffman_Algorithm
         static void Main(string[] args)
         {
             Algorithm huffman = new Algorithm();
-             huffman.Huffman("numbers.txt");
+             huffman.Huffman("numbers.txt",true);
 
             Console.ReadKey();
 

@@ -19,24 +19,52 @@ namespace Huffman_Algorithm
     }
     class Algorithm
     {
-        public List<Node> FromFileToList(string path)
+        public List<Node> FromFileToList(string path, bool mode)
         {
-            string chars = File.ReadAllText(path);
-            char[] charsarray = chars.ToCharArray();
             List<Node> l = new List<Node>();
-            foreach (var c in charsarray)
+            List<string> charCombination = new List<string>();
+            string chars = File.ReadAllText(path);
+            if (mode == true)
             {
-                if(!l.Any(n=>n.Symbol == c.ToString()))
-                    l.Add(new Node(){Freq = charsarray.Count(n=>n==c) , Symbol = c.ToString() });
+               
+                if (chars.Length % 2 != 0)
+                    chars += "1";
+
+                 char[] charsarray = chars.ToCharArray();
+                 for (int i = 0; i < charsarray.Length; i++)
+                 {
+                     for (int j = 0; j < charsarray.Length; j++)
+                     {
+                          string s = charsarray[i].ToString() + charsarray[j].ToString();
+                         charCombination.Add(s);
+                     }
+                 }
             }
+            else
+            {
+                length = 8 * 355;
+                for (int i = 0; i < chars.Length; i++)
+                {
+                    charCombination.Add(chars[i].ToString());
+                }
+            }
+            foreach (var c in charCombination)
+            {
+                if(!l.Any(n=>n.Symbol.Equals(c)))
+                    l.Add(new Node(){Freq = charCombination.Count(n=>n.Equals(c)) , Symbol = c});
+            }
+
+            var le = l.Max(p => p.Freq);
+            length = 8 * le.ToString().Length * 355;
             return l;
 
         }
 
         
-        public void Huffman(string path)
+        public void Huffman(string path,bool mode)
         {
-            List<Node> nodes = FromFileToList(path);
+           List<Node> nodes = FromFileToList(path,mode);
+    
             int number = nodes.Count;
             for (int i = 1; i < number; i++)
             {
@@ -60,7 +88,7 @@ namespace Huffman_Algorithm
         }
 
         Dictionary<Node,string> dic = new Dictionary<Node,string>();
-        private double length = 8*355;
+        private double length;
         private double huffLength;
         public void printCode(Node root, String s)
         {
@@ -123,5 +151,7 @@ namespace Huffman_Algorithm
         {
             draw_tree_hor2(tree, 0);
         }
+
+        
     }
 }
