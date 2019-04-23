@@ -28,13 +28,13 @@ namespace Huffman_Algorithm
                     chars += "1";
 
                  char[] charsarray = chars.ToCharArray();
-                 for (int i = 0; i < charsarray.Length; i++)
+                 for (int i = 0; i < charsarray.Length; i=i+2)
                  {
-                     for (int j = 0; j < charsarray.Length; j++)
-                     {
-                          string s = charsarray[i].ToString() + charsarray[j].ToString();
+                     
+                        
+                          string s = charsarray[i].ToString() + charsarray[i+1].ToString();
                          charCombination.Add(s);
-                     }
+                     
                  }
             }
             else
