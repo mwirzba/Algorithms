@@ -4,12 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BTree
+namespace Disjoint_Set
 {
     class Program
     {
         static void Main(string[] args)
         {
+            Alghoritm alghoritm =  new Alghoritm();
+            alghoritm.Test();
+            Console.ReadKey();
         }
     }
 }
